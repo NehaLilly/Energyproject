@@ -1,0 +1,14 @@
+AIPoweredEnergyMarketplace/
+├── frontend/
+│   ├── index.html
+│   ├── styles.css
+│   ├── script.js
+│   └── forecast.json
+├── contracts/
+│   └── Energy.sol
+├── ai_model/
+│   └── ai_model.py
+├── README.md
+├── structure.txt
+├── .gitignore
+└── requirements.txts

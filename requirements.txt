@@ -1,0 +1,8 @@
+prophet
+scikit-learn
+openpyxl
+xlrd
+xgboost
+numpy
+pandas
+matplotlib

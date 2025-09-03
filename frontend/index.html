@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Decentralized Energy Marketplace</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Web3.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4/web3.min.js"></script>
+    <!-- Inter Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page (Default View) -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <div class="login-form">
+                <div class="logo">⚡ EnergiVerse</div>
+                <h2>Welcome Back</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email Address" value="demo@energy.com">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Password" value="demo123">
+                    </div>
+                    <button type="submit" class="login-btn">Sign In</button>
+                </form>
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                <button class="wallet-login-btn" onclick="walletLogin()">
+                    🦊 Connect with MetaMask
+                </button>
+                <div class="footer-links">
+                    <a href="#forgot">Forgot Password?</a>
+                    <a href="#signup">Create Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="mainApp" class="main-app" style="display: none;">
+        <header class="header">
+            <nav class="nav">
+                <div class="logo">⚡ EnergiVerse</div>
+                <ul class="nav-links">
+                    <li><a href="#analytics">Analytics</a></li>
+                    <li><a href="#marketplace">Marketplace</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="user-menu">
+                    <span id="user-display">demo@energy.com</span>
+                    <button class="logout-btn" onclick="signOut()">Sign Out</button>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>AI-Powered Energy Marketplace</h1>
+                <p>Trade energy securely with blockchain and optimize with AI forecasts</p>
+            </section>
+
+            <!-- Real-time Stats -->
+            <section class="section">
+                <h2>Live Energy Metrics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="currentPrice">$0.12</div>
+                        <div class="stat-label">Current Price/kWh</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalConsumption">847.2</div>
+                        <div class="stat-label">kWh Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="efficiency">94.7%</div>
+                        <div class="stat-label">Grid Efficiency</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="carbonOffset">12.4</div>
+                        <div class="stat-label">Tons CO₂ Saved</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Dashboard -->
+            <section class="section" id="analytics">
+                <h2>Energy Forecast Analytics</h2>
+                <div class="country-selector">
+                    <label for="countrySelect">Select Country: </label>
+                    <select id="countrySelect" onchange="updateForecast()">
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="China">China</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Canada">Canada</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">48-Hour Energy Demand Forecast</div>
+                    <canvas id="demandChart" width="400" height="200"></canvas>
+                </div>
+                <div class="stats-grid" id="forecastStats">
+                    <div class="stat-card">
+                        <div class="feature-icon">📈</div>
+                        <div class="stat-label">Peak Demand</div>
+                        <div class="stat-number" id="peakDemand">131.9 MW</div>
+                        <div class="stat-subtitle" id="peakTime">Expected at 18:30</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="feature-icon">📉</div>
+                        <div class="stat-label">Low Demand</div>
+                        <div class="stat-number" id="lowDemand">63.4 MW</div>
+                        <div class="stat-subtitle" id="lowTime">Expected at 03:15</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="feature-icon">⚡</div>
+                        <div class="stat-label">Avg Demand</div>
+                        <div class="stat-number" id="avgDemand">117.6 MW</div>
+                        <div class="stat-subtitle">Next 48 hours</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="feature-icon">🔄</div>
+                        <div class="stat-label">Trend</div>
+                        <div class="stat-number" id="trend">+0.7%</div>
+                        <div class="stat-subtitle">vs last week</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Marketplace -->
+            <section class="section" id="marketplace">
+                <h2>Energy Marketplace</h2>
+                <!-- List Energy Form -->
+                <div class="list-energy-form">
+                    <h3>List New Energy</h3>
+                    <form id="listEnergyForm">
+                        <div class="form-group">
+                            <input type="number" id="energyAmount" placeholder="Amount (kWh)" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="pricePerUnit" placeholder="Price per kWh (ETH)" step="0.0001" min="0.0001" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="datetime-local" id="expiryDate" required>
+                        </div>
+                        <button type="submit" class="btn">List Energy</button>
+                    </form>
+                    <div id="transactionStatus" style="margin-top: 1rem; color: #00f5ff;"></div>
+                </div>
+                <!-- Marketplace Items -->
+                <div class="marketplace-items" id="marketplaceItems">
+                    <!-- Dynamically populated -->
+                </div>
+            </section>
+
+            <!-- Wallet Connection -->
+            <section class="wallet-section">
+                <h3>🦊 Web3 Wallet</h3>
+                <p>Connect your MetaMask wallet to trade energy</p>
+                <div id="walletStatus">
+                    <button class="btn" onclick="connectWallet()">Connect Wallet</button>
+                </div>
+            </section>
+
+<!-- About Section -->
+<section class="section" id="about">
+    <h2>About EnergyFlow</h2>
+    <div class="about-content">
+        <div class="about-section">
+            <h3>Our Mission</h3>
+            <p>
+                At EnergyFlow, our mission is to revolutionize the energy sector by enabling decentralized, secure, and efficient energy trading.
+                We aim to promote renewable energy adoption and empower individuals and communities to actively participate in the energy market.
+            </p>
+        </div>
+
+        <div class="about-section">
+            <h3>Our Team</h3>
+            <p>
+                EnergyFlow is built by a team of two engineers, data scientists, blockchain developers, and energy experts committed to sustainability and innovation.
+                Our multidisciplinary background allows us to bridge cutting-edge AI forecasting with robust smart contract infrastructure.
+            </p>
+        </div>
+
+        <div class="about-section">
+            <h3>Contact Us</h3>
+            <p>
+                We welcome collaborations, feedback, and questions. Reach out to us:
+            </p>
+            <ul style="list-style: none; padding: 0;">
+                <li><strong>Email:</strong> lilsan@energyflow.io</li>
+                <li><strong>Phone:</strong> +91 8921558442,6282979154</li>
+                <li><strong>Address:</strong> EnergyFlow Technologies,infopark, Kerala, India</li>
+            </ul>
+        </div>
+    </div>
+</section>
+    <script src="script.js"></script>
+</body>
+</html>

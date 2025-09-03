@@ -1,115 +1,30 @@
-AI-Powered Decentralized Energy Marketplace System
-Overview
-This project combines a blockchain-based energy marketplace with AI-driven energy demand forecasting. It features:
+# Energiverse: AI-Powered Decentralized Energy Marketplace System
 
-A web frontend for user interaction.
-A Solidity smart contract for secure energy trading.
-A Python AI model for forecasting energy demand.
+## Overview
+Energiverse is a decentralized platform that combines **blockchain** and **AI forecasting** for secure and intelligent energy trading.  
+Users can trade electricity transparently, while AI models predict energy demand for smarter decision-making.
 
-Project Structure
-AIPoweredEnergyMarketplace/
-├── frontend/
-│   ├── index.html        # Webpage UI
-│   ├── styles.css       # CSS styles
-│   ├── script.js        # JavaScript logic
-│   └── forecast.json    # AI forecast data
-├── contracts/
-│   └── Energy.sol       # Solidity smart contract
-├── ai_model/
-│   └── ai_model.py      # Python AI model
-├── README.md            # Project documentation
-├── structure.txt        # Project structure description
-├── .gitignore          # Git ignore file
-└── requirements.txt     # Python dependencies
+## Key Features
+- Blockchain smart contract for secure energy exchange  
+- AI model (Prophet + XGBoost) for 48-hour energy demand forecasting  
+- Web dashboard with charts and analytics  
+- Integration with MetaMask for wallet-based access  
 
-Components
+## Tech Stack
+- **Frontend:** HTML, CSS, JavaScript, Web3.js, Chart.js  
+- **Blockchain:** Solidity, OpenZeppelin, Remix IDE  
+- **AI Model:** Python, Prophet, XGBoost, NumPy, Scikit-learn  
 
-Frontend:
+## How It Works
+1. **Frontend:** User logs in, connects wallet, and interacts with the marketplace  
+2. **Smart Contract:** Manages listing, buying, and withdrawing energy  
+3. **AI Model:** Forecasts energy demand and exports results for frontend visualization  
 
-Built with HTML, CSS, JavaScript.
-Features login, dashboard, analytics, and marketplace.
-Uses Web3.js for blockchain interaction and Chart.js for visualizations.
+## Setup
+- Install Node.js, Python 3.8+, VS Code  
+- Run frontend with Live Server  
+- Deploy smart contract via Remix IDE (testnet: Sepolia)  
+- Generate forecasts by running `ai_model.py`  
 
-
-Smart Contract:
-
-Energy.sol: Manages energy listings, purchases, and withdrawals.
-Uses OpenZeppelin for security.
-
-
-AI Model:
-
-ai_model.py: Uses Prophet and XGBoost for 48-hour energy demand forecasting.
-Exports forecasts to forecast.json.
-
-
-
-Setup Instructions
-Prerequisites
-
-VS Code: Install from code.visualstudio.com.
-Extensions: Install Live Server, Prettier, Solidity, Python.
-Node.js: For frontend and contract deployment.
-Python 3.8+: For AI model.
-Remix IDE: For contract compilation/deployment.
-MetaMask: For blockchain interaction.
-
-Steps
-
-Frontend:
-
-Create frontend folder and add index.html, styles.css, script.js.
-Open index.html with Live Server to test.
-Test login (demo@energy.com, demo123) and wallet connection.
-
-
-Smart Contract:
-
-Open Energy.sol in Remix IDE (remix.ethereum.org).
-Compile with Solidity ^0.8.17.
-Deploy to a testnet (e.g., Sepolia) and update script.js with contract address and ABI.
-Install OpenZeppelin:npm install @openzeppelin/contracts
-
-
-
-
-AI Model:
-
-Create ai_model folder and add ai_model.py.
-Install dependencies:pip install -r requirements.txt
-
-
-Place energy data (CSV/Excel) in EnergyData/ folder.
-Run ai_model.py to generate frontend/forecast.json.
-
-
-
-Running the Project
-
-Frontend:
-
-Open frontend/index.html with Live Server.
-Test login, wallet connection, listing/buying energy, and charts.
-
-
-Smart Contract:
-
-Deploy via Remix and test functions (listEnergy, buyEnergy, withdraw).
-Verify seller status before listing.
-
-
-AI Model:
-
-Run ai_model.py to generate forecasts and forecast.json.
-Check plots and accuracy metrics.
-
-
-
-Next Steps
-
-Deploy frontend to Netlify/Vercel.
-Deploy smart contract to a mainnet.
-Add user authentication and advanced analytics.
-
-License
+## License
 MIT License
